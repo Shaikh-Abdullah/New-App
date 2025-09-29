@@ -9,6 +9,7 @@ const NewsList = () => {
   const [otherArticles, setOtherArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [postsToShow, setPostsToShow] = useState(10)
 
   const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -26,6 +27,7 @@ const NewsList = () => {
         setFeaturedArticles(filteredArticles.slice(0, 4));
         setOtherArticles(filteredArticles.slice(4));
         setLoading(false);
+        setPostsToShow(10);
       })
       .catch((error) => {
         setError(error);
@@ -33,6 +35,12 @@ const NewsList = () => {
       });
   }, [apiKey]);
 
+  const handleShowMore = () => {
+    setPostsToShow(postsToShow + 10);
+  }
+  const handleShowLess = () => {
+    setPostsToShow(postsToShow - 10);
+  }
   return (
     <div className="news-list-container">
       {loading && <Shimmer />}
@@ -43,10 +51,16 @@ const NewsList = () => {
           <div className="news-feed">
             <h2 className="feed-title">More Stories</h2>
             <div className="news-grid">
-              {otherArticles.map((article, index) => (
+              {otherArticles.slice(0, postsToShow).map((article, index) => (
                 <NewsItem key={index} article={article} />
               ))}
             </div>
+            {postsToShow < otherArticles.length && (
+              <button onClick={handleShowMore} className="show-more-button">Show More</button>
+            )}
+            {postsToShow >= otherArticles.length && (
+              <button onClick={handleShowLess} className="show-more-button">Show Less</button>
+            )}
           </div>
         </>
       )}

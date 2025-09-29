@@ -9,13 +9,13 @@ const Navbar = () => {
         <Link to="/" className="navbar-logo">
           NewsApp
         </Link>
-        <ul className="nav-menu">
+        {/* <ul className="nav-menu">
           <li className="nav-item">
             <Link to="/" className="nav-links">
               Home
             </Link>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </nav>
   );
