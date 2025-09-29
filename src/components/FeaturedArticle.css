@@ -76,7 +76,8 @@
 }
 
 .featured-read-more:hover {
-  background-color: #67E8F9;
+  background-color: #fff;
+  color: #22D3EE;
   transform: scale(1.05);
 }
 
